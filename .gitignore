@@ -1,1 +1,7 @@
+# folders
 Debug_FLASH/
+.vscode
+
+# files
+*.g_c
+*.g_x

@@ -123,7 +123,7 @@ int main(void)
  	McuCacheConfig();
 	McuPowerConfig();
  	McuIntConfig();
- 	McuSimConfig();
+ 	// McuSimConfig();
 	McuTrigmuxConfig();
  	McuPinsConfig();
  	McuLpuartConfig();
