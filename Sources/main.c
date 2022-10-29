@@ -135,13 +135,15 @@ int main(void)
 	FMSTR_Init();
 
     // MC34GD3000 initialization
-    GD3000_Init();
+    // GD3000_Init();
 
     // MCAT variables initialization
     MCAT_Init();
 
     // Clear measured variables
     MEAS_Clear(&meas);
+
+    PINS_DRV_WritePin(PTC, 17, 0);
 
     // Application starts from init state
     cntrState.state   	= init;
@@ -151,7 +153,7 @@ int main(void)
     cntrState.usrControl.FOCcontrolMode		= speedControl;
 
     // Application starts by FTM3 initialization trigger
-    FTM_RMW_EXTTRIG_REG(FTM3, 0x00, 0x40);
+    FTM_RMW_EXTTRIG_REG(FTM0, 0x00, 0x40);
 
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   #ifdef PEX_RTOS_INIT
@@ -166,7 +168,7 @@ int main(void)
     	/* FreeMASTER */
     	FMSTR_Poll();
 
-    	// Read GD3000 Status register 0 and Status register 1, if there is GD3000 interrupt
+/*     	// Read GD3000 Status register 0 and Status register 1, if there is GD3000 interrupt
     	if(gd3000Status.B.gd3000IntFlag)
     	{
     		gd3000Status.B.gd3000IntFlag = false;
@@ -180,17 +182,17 @@ int main(void)
     		permFaults.gd3000 = false;
     		tppDrvConfig.deviceConfig.statusRegister[0U] = 0U;
     		TPP_ClearInterrupts(&tppDrvConfig, TPP_CLINT0_MASK, TPP_CLINT1_MASK);
-    	}
+    	} */
 
     	// Enter fault state, if there are PDBs sequence errors
     	if(permFaults.mcu.B.PDB0_Error || permFaults.mcu.B.PDB1_Error)
     	{
-    		FTM_RMW_EXTTRIG_REG(FTM3, 0x40, 0x00);
+    		FTM_RMW_EXTTRIG_REG(FTM0, 0x40, 0x00);
 
     		// Enter fault state
     		cntrState.event = e_fault;
     		StateTable[cntrState.event][cntrState.state]();
-    		StateLED[cntrState.state]();
+    		// StateLED[cntrState.state]();
     	}
     }
 
@@ -314,7 +316,7 @@ void PDB1_IRQHandler(void)
 		// Enable FTM initialization trigger to trigger ADC modules
 		// every second PWM cycle (10kHz). Ignore if there are PDBs sequence errors
 		if(!(permFaults.mcu.B.PDB0_Error || permFaults.mcu.B.PDB1_Error))
-			FTM_RMW_EXTTRIG_REG(FTM3, 0x00, 0x40);
+			FTM_RMW_EXTTRIG_REG(FTM0, 0x00, 0x40);
 
 		// Clear PDB1 timer interrupt flag
 		PDB_DRV_ClearTimerIntFlag(INST_PDB1);
@@ -335,7 +337,7 @@ void ADC1_IRQHandler()
 
 	// Disable FTM initialization trigger to trigger ADC modules
 	// every second PWM cycle (10kHz)
-	FTM_RMW_EXTTRIG_REG(FTM3, 0x40, 0x00);
+	FTM_RMW_EXTTRIG_REG(FTM0, 0x40, 0x00);
 
 	// Board buttons to control the application from board
 	cntrState.usrControl.btSpeedUp = ((PINS_DRV_ReadPins(PTC)  >> 12) & 1);
@@ -377,7 +379,7 @@ void ADC1_IRQHandler()
 	// Clear pin to measure TOTAL execution time
 	//PTD->PCOR |= 1<<2;
 
-	StateLED[cntrState.state]();
+	// StateLED[cntrState.state]();
 
 	FMSTR_Recorder();
 }
@@ -643,7 +645,7 @@ void StateFault()
 
 		// Enable FTM init trigger for PDBs after cleared PDBs sequence errors
 		// and unlocked PDBs pre-triggers
-		FTM_RMW_EXTTRIG_REG(FTM3, 0x00, 0x40);
+		FTM_RMW_EXTTRIG_REG(FTM0, 0x00, 0x40);
     }
 }
 /***************************************************************************//*!

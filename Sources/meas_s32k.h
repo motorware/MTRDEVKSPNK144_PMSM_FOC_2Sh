@@ -16,7 +16,7 @@
 #define _MEAS_S32K_H_
 
 #include "PMSM_appconfig.h"
-#include "s32k144.h"
+#include "s32k142.h"
 #include "peripherals_config.h"
 #include "gflib.h"
 #include "gmclib.h"

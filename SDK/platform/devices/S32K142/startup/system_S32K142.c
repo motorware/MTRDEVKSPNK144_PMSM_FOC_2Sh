@@ -44,7 +44,7 @@
  */
 
 #include "device_registers.h"
-#include "system_S32K144.h"
+#include "system_S32K142.h"
 #include "stdbool.h"
 
 /* ----------------------------------------------------------------------------
@@ -138,12 +138,12 @@ void SystemCoreClockUpdate(void)
     case 0x2:
       /* Slow IRC */
       regValue = (SCG->SIRCCFG & SCG_SIRCCFG_RANGE_MASK) >> SCG_SIRCCFG_RANGE_SHIFT;
-	  
+
       if (regValue != 0U)
       {
         SCGOUTClock = FEATURE_SCG_SIRC_HIGH_RANGE_FREQ;
-      }
-
+	  }
+	  
       break;
     case 0x3:
       /* Fast IRC */

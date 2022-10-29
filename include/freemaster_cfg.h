@@ -31,9 +31,9 @@
 #define FMSTR_CAN_BASE         0x40024000UL /* FlexCAN0 base on S32K14x */
 
 #define FMSTR_DISABLE          0    /* To disable all FreeMASTER functionalities */
-#define FMSTR_USE_LPUART       1    /* To select LPUART communication interface */
+#define FMSTR_USE_LPUART       0    /* To select LPUART communication interface */
 #define FMSTR_USE_FLEXCAN      0    /* To select FlexCAN communication interface */
-#define FMSTR_USE_PDBDM        0    /* To select Packet Driven BDM communication interface (optional) */
+#define FMSTR_USE_PDBDM        1    /* To select Packet Driven BDM communication interface (optional) */
 
 /* Select RX and TX FlexCAN Message buffers */
 #define FMSTR_FLEXCAN_TXMB     0

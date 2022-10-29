@@ -17,16 +17,16 @@
  */
 
 
-/*! @addtogroup soc_support_S32K144*/
+/*! @addtogroup soc_support_S32K142*/
 /*! @{*/
 
 /*!
- * @file system_S32K144.h
- * @brief Device specific configuration file for S32K144
+ * @file system_S32K142.h
+ * @brief Device specific configuration file for S32K142
  */
 
-#ifndef SYSTEM_S32K144_H_
-#define SYSTEM_S32K144_H_                        /**< Symbol preventing repeated inclusion */
+#ifndef SYSTEM_S32K142_H_
+#define SYSTEM_S32K142_H_                        /**< Symbol preventing repeated inclusion */
 
 #include <stdint.h>
 
@@ -108,4 +108,4 @@ void SystemSoftwareReset(void);
 #endif
 
 /*! @}*/
-#endif  /* #if !defined(SYSTEM_S32K144_H_) */
+#endif  /* #if !defined(SYSTEM_S32K142_H_) */

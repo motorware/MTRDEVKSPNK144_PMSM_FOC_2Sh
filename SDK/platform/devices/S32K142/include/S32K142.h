@@ -1,12 +1,12 @@
 /*
 ** ###################################################################
-**     Processor:           S32K144
+**     Processor:           S32K142
 **     Reference manual:    S32K1XXRM Rev. 9, 09/2018
 **     Version:             rev. 4.2, 2019-02-19
 **     Build:               b190219
 **
 **     Abstract:
-**         Peripheral Access Layer for S32K144
+**         Peripheral Access Layer for S32K142
 **
 **     Copyright (c) 1997 - 2016 Freescale Semiconductor, Inc.
 **     Copyright 2016-2019 NXP
@@ -28,94 +28,15 @@
 **     mail:                 support@nxp.com
 **
 **     Revisions:
-**     - rev. 1.0 (2015-04-09) - Iulian Talpiga
+**     - rev. 1.0 (2016-11-24) - Iulian Talpiga
 **         Initial version.
-**     - rev. 1.1 (2015-05-19) - Bogdan Nitu
-**         Updated interrupts table
-**         Removed SIM_CHIPCTL_DAC2CMP
-**         Compacted PORT_PCR registers
-**         Compacted PCC registers
-**     - rev. 1.2 (2015-06-02) - Bogdan Nitu
-**         Added 'U' suffix to all integer constants
-**         Use "" instead of <> for Platform type inclusion
-**         CNT register from WDOG module is RW
-**     - rev. 1.3 (2015-08-05) - Iulian Talpiga
-**         Synchronized with latest RDP
-**         Removed OSC32 module
-**         Removed reserved registers
-**         Incorporated bit band acces macros
-**         Switched to standard C99 data types
-**         Added 'u' to constants
-**         Added size defines for register arrays
-**         Define peripheral instance count
-**     - rev. 1.4 (2015-08-10) - Iulian Talpiga
-**         Compacted TRGMUX registers
-**         Defined array index offsets for PCC and TRGMUX
-**         Added FPU registers
-**         Group FTM channel registers
-**         Added interrupt information to peripherals
-**         Renamed CAN interrupts according  to the reference manual
-**         Added author information to revisions
-**     - rev. 1.5 (2015-09-16) - Iulian Talpiga
-**         Renamed NVIC and SCB to avoid conflict
-**         Compacted CAN Wake-up Message buffers
-**         Added CAN embedded RAM
-**         Updated interrupts: LPIT, FTFE, LPUART,ACMP
-**         Corrected ADC_SC1_ADCH_WIDTH
-**         Compacted PDB registers
-**         Corrected CAN, FTM, and PDB count defines
-**         Guarding register acces macro against redefintion
-**     - rev. 1.6 (2015-09-29) - Iulian Talpiga
-**         Added WATER and FIFO registers to LPUART.
-**     - rev. 1.7 (2015-10-21) - Iulian Talpiga
-**         Updated ADC, AIPS, CMP, LMEM, LPTMR, PMC, PORT, RCM, RTC, SCG, SIM
-**         Compacted MPU and LPIT
-**         Added FSL_SysTick
-**         Updated doxygen documentation grouping
-**         Updated interrupts: RCM
-**     - rev. 1.8 (2016-01-06) - Iulian Talpiga
-**         Updated DMA, compacted TCD registers
-**         Updated SCG, removed SC2P - SC16P
-**         Added 8 and 16 bit access to DATA register, CRC module
-**     - rev. 1.9 (2016-02-15) - Iulian Talpiga
-**         Updated CRC, renamed DATA union
-**         Updated PMC, added CLKBIASDIS bitfield
-**         Added FSL_NVIC registers to SVD
-**     - rev. 2.0 (2016-04-07) - Iulian Talpiga
-**         Updated support for Rev2.0 silicon (0N47T)
-**         Updated ADC, AIPS, DMA, FlexIO, FTM, GPIO, LPI2C, LPIT, LPSPI, MCM, MPU, MSCM, PMC, RTC, RCM, PCC, RTC, SCG, SIM, TRGMUX and WDOG  module
-**         Updated interrupts
-**         Added EIM and ERM modules
-**         Added EIM and ERM modules
-**     - rev. 2.1 (2016-06-10) - Iulian Talpiga
-**         Updated to latest RM
-**         Minor changes to: CAN, EIM, LPI2C, MPU, PCC, PMC, RTC, SIM and TRGMUX
-**     - rev. 2.2 (2016-08-02) - Iulian Talpiga
-**         Updated to latest RM
-**         Minor changes to: ADC, CAN, CRC, FTFC, LMEM, LPI2C, MCM, MSCM, PCC, RTC, SIM
-**         Added CSE_PRAM
-**     - rev. 2.3 (2016-09-09) - Iulian Talpiga
-**         Updated to latest RM
-**         Minor changes to: PCC, FSL_NVIC and FTM
-**     - rev. 2.4 (2016-09-28) - Iulian Talpiga
-**         Fix RAMn array size in FlexCAN
-**         Fix FCSESTAT bit order
-**         Added CP0CFG0, CP0CFG1,CP0CFG2 and CP0CFG3 in MSCM
-**         Fixed STIR register in FSL_NVIC
-**         Fixed SHPR3 and ACTLR registers in FSL_SCB
-**     - rev. 2.5 (2016-11-25) - Iulian Talpiga
-**         Fix FRAC bit-field in PCC module
-**         Removed BITBAND_ACCESS macros
-**         Added MISRA declarations
-**         Updated copyright
-**         Changed prefix of NVIC, SCB and SysTick to S32_
-**     - rev. 2.6 (2017-01-09) - Iulian Talpiga
-**         Fix interrupts for CAN, LPUART, FTFC
-**     - rev. 2.7 (2017-02-22) - Iulian Talpiga
+**     - rev. 1.1 (2017-01-09) - Iulian Talpiga
+**         Fix interrupts
+**     - rev. 2.0 (2017-02-23) - Iulian Talpiga
 **         Update header as per rev S32K14XRM Rev. 2, 02/2017
 **         Updated modules AIPS, CAN, LPI2C, LPSPI, MCM, MPU, SCG and SIM
-**     - rev. 2.8 (2017-03-27) - Iulian Talpiga
-**         Synchronized PCC_FlexIO on S32K Family
+**     - rev. 2.1 (2017-06-08) - Iulian Talpiga
+**         Correct FTM module - add dithering registers.
 **     - rev. 3.0 (2017-08-04) - Mihai Volmer
 **         Update header as per rev S32K1XXRM Rev. 4, 06/2017
 **         Updated modules CAN, MCM and PORTn
@@ -123,7 +44,7 @@
 **         Update NVIC Size of Registers Arrays
 **     - rev. 4.0 (2018-02-28) - Mihai Volmer
 **         Updated header as per rev S32K1XXRM Rev. 6, 12/2017
-**         Updated modules ERM, I2C, MSCM and SIM
+**         Updated modules ERM, I2C, MSCM, PCC and SIM
 **     - rev. 4.1 (2018-07-19) - Dan Nastasa
 **         Updated the header based on S32K1XXRM Rev. 8, 06/2018.
 **     - rev. 4.2 (2019-02-19) - Ionut Pavel
@@ -133,10 +54,10 @@
 */
 
 /*!
- * @file S32K144.h
+ * @file S32K142.h
  * @version 4.2
  * @date 2019-02-19
- * @brief Peripheral Access Layer for S32K144
+ * @brief Peripheral Access Layer for S32K142
  *
  * This file contains register definitions and macros for easy access to their
  * bit fields.
@@ -185,13 +106,13 @@
    ---------------------------------------------------------------------------- */
 
 /* Prevention from multiple including the same memory map */
-#if !defined(S32K144_H_)  /* Check if memory map has not been already included */
-#define S32K144_H_
-#define MCU_S32K144
+#if !defined(S32K142_H_)  /* Check if memory map has not been already included */
+#define S32K142_H_
+#define MCU_S32K142
 
 /* Check if another memory map has not been also included */
 #if (defined(MCU_ACTIVE))
-  #error S32K144 memory map: There is already included another memory map. Only one memory map can be included.
+  #error S32K142 memory map: There is already included another memory map. Only one memory map can be included.
 #endif /* (defined(MCU_ACTIVE)) */
 #define MCU_ACTIVE
 
@@ -262,11 +183,11 @@
 
 
 /* ----------------------------------------------------------------------------
-   -- Interrupt vector numbers for S32K144
+   -- Interrupt vector numbers for S32K142
    ---------------------------------------------------------------------------- */
 
 /*!
- * @addtogroup Interrupt_vector_numbers_S32K144 Interrupt vector numbers for S32K144
+ * @addtogroup Interrupt_vector_numbers_S32K142 Interrupt vector numbers for S32K142
  * @{
  */
 
@@ -325,10 +246,8 @@ typedef enum
   LPI2C0_Slave_IRQn            = 25u,              /**< LPI2C0 Slave Interrupt */
   LPSPI0_IRQn                  = 26u,              /**< LPSPI0 Interrupt */
   LPSPI1_IRQn                  = 27u,              /**< LPSPI1 Interrupt */
-  LPSPI2_IRQn                  = 28u,              /**< LPSPI2 Interrupt */
   LPUART0_RxTx_IRQn            = 31u,              /**< LPUART0 Transmit / Receive Interrupt */
   LPUART1_RxTx_IRQn            = 33u,              /**< LPUART1 Transmit / Receive  Interrupt */
-  LPUART2_RxTx_IRQn            = 35u,              /**< LPUART2 Transmit / Receive  Interrupt */
   ADC0_IRQn                    = 39u,              /**< ADC0 interrupt request. */
   ADC1_IRQn                    = 40u,              /**< ADC1 interrupt request. */
   CMP0_IRQn                    = 41u,              /**< CMP0 interrupt request */
@@ -359,9 +278,6 @@ typedef enum
   CAN1_ORed_IRQn               = 85u,              /**< CAN1 OR'ed [Bus Off OR Transmit Warning OR Receive Warning] */
   CAN1_Error_IRQn              = 86u,              /**< CAN1 Interrupt indicating that errors were detected on the CAN bus */
   CAN1_ORed_0_15_MB_IRQn       = 88u,              /**< CAN1 OR'ed Interrupt for Message buffer (0-15) */
-  CAN2_ORed_IRQn               = 92u,              /**< CAN2 OR'ed [Bus Off OR Transmit Warning OR Receive Warning] */
-  CAN2_Error_IRQn              = 93u,              /**< CAN2 Interrupt indicating that errors were detected on the CAN bus */
-  CAN2_ORed_0_15_MB_IRQn       = 95u,              /**< CAN2 OR'ed Message buffer (0-15) */
   FTM0_Ch0_Ch1_IRQn            = 99u,              /**< FTM0 Channel 0 and 1 interrupt */
   FTM0_Ch2_Ch3_IRQn            = 100u,             /**< FTM0 Channel 2 and 3 interrupt */
   FTM0_Ch4_Ch5_IRQn            = 101u,             /**< FTM0 Channel 4 and 5 interrupt */
@@ -390,15 +306,15 @@ typedef enum
 
 /*!
  * @}
- */ /* end of group Interrupt_vector_numbers_S32K144 */
+ */ /* end of group Interrupt_vector_numbers_S32K142 */
 
 
 /* ----------------------------------------------------------------------------
-   -- Device Peripheral Access Layer for S32K144
+   -- Device Peripheral Access Layer for S32K142
    ---------------------------------------------------------------------------- */
 
 /*!
- * @addtogroup Peripheral_access_layer_S32K144 Device Peripheral Access Layer for S32K144
+ * @addtogroup Peripheral_access_layer_S32K142 Device Peripheral Access Layer for S32K142
  * @{
  */
 
@@ -997,7 +913,7 @@ typedef struct {
 } CAN_Type, *CAN_MemMapPtr;
 
  /** Number of instances of the CAN module. */
-#define CAN_INSTANCE_COUNT                       (3u)
+#define CAN_INSTANCE_COUNT                       (2u)
 
 
 /* CAN - Peripheral instance base addresses */
@@ -1009,14 +925,10 @@ typedef struct {
 #define CAN1_BASE                                (0x40025000u)
 /** Peripheral CAN1 base pointer */
 #define CAN1                                     ((CAN_Type *)CAN1_BASE)
-/** Peripheral CAN2 base address */
-#define CAN2_BASE                                (0x4002B000u)
-/** Peripheral CAN2 base pointer */
-#define CAN2                                     ((CAN_Type *)CAN2_BASE)
 /** Array initializer of CAN peripheral base addresses */
-#define CAN_BASE_ADDRS                           { CAN0_BASE, CAN1_BASE, CAN2_BASE }
+#define CAN_BASE_ADDRS                           { CAN0_BASE, CAN1_BASE }
 /** Array initializer of CAN peripheral base pointers */
-#define CAN_BASE_PTRS                            { CAN0, CAN1, CAN2 }
+#define CAN_BASE_PTRS                            { CAN0, CAN1 }
  /** Number of interrupt vector arrays for the CAN module. */
 #define CAN_IRQS_ARR_COUNT                       (7u)
  /** Number of interrupt channels for the Rx_Warning type of CAN module. */
@@ -1034,13 +946,13 @@ typedef struct {
  /** Number of interrupt channels for the ORed_16_31_MB type of CAN module. */
 #define CAN_ORed_16_31_MB_IRQS_CH_COUNT          (1u)
 /** Interrupt vectors for the CAN peripheral type */
-#define CAN_Rx_Warning_IRQS                      { CAN0_ORed_IRQn, CAN1_ORed_IRQn, CAN2_ORed_IRQn }
-#define CAN_Tx_Warning_IRQS                      { CAN0_ORed_IRQn, CAN1_ORed_IRQn, CAN2_ORed_IRQn }
-#define CAN_Wake_Up_IRQS                         { CAN0_Wake_Up_IRQn, NotAvail_IRQn, NotAvail_IRQn }
-#define CAN_Error_IRQS                           { CAN0_Error_IRQn, CAN1_Error_IRQn, CAN2_Error_IRQn }
-#define CAN_Bus_Off_IRQS                         { CAN0_ORed_IRQn, CAN1_ORed_IRQn, CAN2_ORed_IRQn }
-#define CAN_ORed_0_15_MB_IRQS                    { CAN0_ORed_0_15_MB_IRQn, CAN1_ORed_0_15_MB_IRQn, CAN2_ORed_0_15_MB_IRQn }
-#define CAN_ORed_16_31_MB_IRQS                   { CAN0_ORed_16_31_MB_IRQn, NotAvail_IRQn, NotAvail_IRQn }
+#define CAN_Rx_Warning_IRQS                      { CAN0_ORed_IRQn, CAN1_ORed_IRQn }
+#define CAN_Tx_Warning_IRQS                      { CAN0_ORed_IRQn, CAN1_ORed_IRQn }
+#define CAN_Wake_Up_IRQS                         { CAN0_Wake_Up_IRQn, NotAvail_IRQn }
+#define CAN_Error_IRQS                           { CAN0_Error_IRQn, CAN1_Error_IRQn }
+#define CAN_Bus_Off_IRQS                         { CAN0_ORed_IRQn, CAN1_ORed_IRQn }
+#define CAN_ORed_0_15_MB_IRQS                    { CAN0_ORed_0_15_MB_IRQn, CAN1_ORed_0_15_MB_IRQn }
+#define CAN_ORed_16_31_MB_IRQS                   { CAN0_ORed_16_31_MB_IRQn, NotAvail_IRQn }
 
 /* ----------------------------------------------------------------------------
    -- CAN Register Masks
@@ -3995,6 +3907,7 @@ typedef struct {
 
 /** FTM - Size of Registers Arrays */
 #define FTM_CONTROLS_COUNT                       8u
+#define FTM_CV_MIRROR_COUNT                      8u
 
 /** FTM - Register Layout Typedef */
 typedef struct {
@@ -4033,6 +3946,9 @@ typedef struct {
   __IO uint32_t PAIR2DEADTIME;                     /**< Pair 2 Deadtime Configuration, offset: 0xB0 */
        uint8_t RESERVED_2[4];
   __IO uint32_t PAIR3DEADTIME;                     /**< Pair 3 Deadtime Configuration, offset: 0xB8 */
+       uint8_t RESERVED_3[324];
+  __IO uint32_t MOD_MIRROR;                        /**< Mirror of Modulo Value, offset: 0x200 */
+  __IO uint32_t CV_MIRROR[FTM_CV_MIRROR_COUNT];    /**< Mirror of Channel (n) Match Value, array offset: 0x204, array step: 0x4 */
 } FTM_Type, *FTM_MemMapPtr;
 
  /** Number of instances of the FTM module. */
@@ -5002,6 +4918,24 @@ typedef struct {
 #define FTM_PAIR3DEADTIME_DTVALEX_SHIFT          16u
 #define FTM_PAIR3DEADTIME_DTVALEX_WIDTH          4u
 #define FTM_PAIR3DEADTIME_DTVALEX(x)             (((uint32_t)(((uint32_t)(x))<<FTM_PAIR3DEADTIME_DTVALEX_SHIFT))&FTM_PAIR3DEADTIME_DTVALEX_MASK)
+/* MOD_MIRROR Bit Fields */
+#define FTM_MOD_MIRROR_FRACMOD_MASK              0xF800u
+#define FTM_MOD_MIRROR_FRACMOD_SHIFT             11u
+#define FTM_MOD_MIRROR_FRACMOD_WIDTH             5u
+#define FTM_MOD_MIRROR_FRACMOD(x)                (((uint32_t)(((uint32_t)(x))<<FTM_MOD_MIRROR_FRACMOD_SHIFT))&FTM_MOD_MIRROR_FRACMOD_MASK)
+#define FTM_MOD_MIRROR_MOD_MASK                  0xFFFF0000u
+#define FTM_MOD_MIRROR_MOD_SHIFT                 16u
+#define FTM_MOD_MIRROR_MOD_WIDTH                 16u
+#define FTM_MOD_MIRROR_MOD(x)                    (((uint32_t)(((uint32_t)(x))<<FTM_MOD_MIRROR_MOD_SHIFT))&FTM_MOD_MIRROR_MOD_MASK)
+/* CV_MIRROR Bit Fields */
+#define FTM_CV_MIRROR_FRACVAL_MASK               0xF800u
+#define FTM_CV_MIRROR_FRACVAL_SHIFT              11u
+#define FTM_CV_MIRROR_FRACVAL_WIDTH              5u
+#define FTM_CV_MIRROR_FRACVAL(x)                 (((uint32_t)(((uint32_t)(x))<<FTM_CV_MIRROR_FRACVAL_SHIFT))&FTM_CV_MIRROR_FRACVAL_MASK)
+#define FTM_CV_MIRROR_VAL_MASK                   0xFFFF0000u
+#define FTM_CV_MIRROR_VAL_SHIFT                  16u
+#define FTM_CV_MIRROR_VAL_WIDTH                  16u
+#define FTM_CV_MIRROR_VAL(x)                     (((uint32_t)(((uint32_t)(x))<<FTM_CV_MIRROR_VAL_SHIFT))&FTM_CV_MIRROR_VAL_MASK)
 
 /*!
  * @}
@@ -6217,7 +6151,7 @@ typedef struct {
 } LPSPI_Type, *LPSPI_MemMapPtr;
 
  /** Number of instances of the LPSPI module. */
-#define LPSPI_INSTANCE_COUNT                     (3u)
+#define LPSPI_INSTANCE_COUNT                     (2u)
 
 
 /* LPSPI - Peripheral instance base addresses */
@@ -6229,20 +6163,16 @@ typedef struct {
 #define LPSPI1_BASE                              (0x4002D000u)
 /** Peripheral LPSPI1 base pointer */
 #define LPSPI1                                   ((LPSPI_Type *)LPSPI1_BASE)
-/** Peripheral LPSPI2 base address */
-#define LPSPI2_BASE                              (0x4002E000u)
-/** Peripheral LPSPI2 base pointer */
-#define LPSPI2                                   ((LPSPI_Type *)LPSPI2_BASE)
 /** Array initializer of LPSPI peripheral base addresses */
-#define LPSPI_BASE_ADDRS                         { LPSPI0_BASE, LPSPI1_BASE, LPSPI2_BASE }
+#define LPSPI_BASE_ADDRS                         { LPSPI0_BASE, LPSPI1_BASE }
 /** Array initializer of LPSPI peripheral base pointers */
-#define LPSPI_BASE_PTRS                          { LPSPI0, LPSPI1, LPSPI2 }
+#define LPSPI_BASE_PTRS                          { LPSPI0, LPSPI1 }
  /** Number of interrupt vector arrays for the LPSPI module. */
 #define LPSPI_IRQS_ARR_COUNT                     (1u)
  /** Number of interrupt channels for the LPSPI module. */
 #define LPSPI_IRQS_CH_COUNT                      (1u)
 /** Interrupt vectors for the LPSPI peripheral type */
-#define LPSPI_IRQS                               { LPSPI0_IRQn, LPSPI1_IRQn, LPSPI2_IRQn }
+#define LPSPI_IRQS                               { LPSPI0_IRQn, LPSPI1_IRQn }
 
 /* ----------------------------------------------------------------------------
    -- LPSPI Register Masks
@@ -6706,7 +6636,7 @@ typedef struct {
 } LPUART_Type, *LPUART_MemMapPtr;
 
  /** Number of instances of the LPUART module. */
-#define LPUART_INSTANCE_COUNT                    (3u)
+#define LPUART_INSTANCE_COUNT                    (2u)
 
 
 /* LPUART - Peripheral instance base addresses */
@@ -6718,20 +6648,16 @@ typedef struct {
 #define LPUART1_BASE                             (0x4006B000u)
 /** Peripheral LPUART1 base pointer */
 #define LPUART1                                  ((LPUART_Type *)LPUART1_BASE)
-/** Peripheral LPUART2 base address */
-#define LPUART2_BASE                             (0x4006C000u)
-/** Peripheral LPUART2 base pointer */
-#define LPUART2                                  ((LPUART_Type *)LPUART2_BASE)
 /** Array initializer of LPUART peripheral base addresses */
-#define LPUART_BASE_ADDRS                        { LPUART0_BASE, LPUART1_BASE, LPUART2_BASE }
+#define LPUART_BASE_ADDRS                        { LPUART0_BASE, LPUART1_BASE }
 /** Array initializer of LPUART peripheral base pointers */
-#define LPUART_BASE_PTRS                         { LPUART0, LPUART1, LPUART2 }
+#define LPUART_BASE_PTRS                         { LPUART0, LPUART1 }
  /** Number of interrupt vector arrays for the LPUART module. */
 #define LPUART_IRQS_ARR_COUNT                    (1u)
  /** Number of interrupt channels for the RX_TX type of LPUART module. */
 #define LPUART_RX_TX_IRQS_CH_COUNT               (1u)
 /** Interrupt vectors for the LPUART peripheral type */
-#define LPUART_RX_TX_IRQS                        { LPUART0_RxTx_IRQn, LPUART1_RxTx_IRQn, LPUART2_RxTx_IRQn }
+#define LPUART_RX_TX_IRQS                        { LPUART0_RxTx_IRQn, LPUART1_RxTx_IRQn }
 
 /* ----------------------------------------------------------------------------
    -- LPUART Register Masks
@@ -8165,10 +8091,8 @@ typedef struct {
 #define PCC_FlexCAN1_INDEX                       37
 #define PCC_FTM3_INDEX                           38
 #define PCC_ADC1_INDEX                           39
-#define PCC_FlexCAN2_INDEX                       43
 #define PCC_LPSPI0_INDEX                         44
 #define PCC_LPSPI1_INDEX                         45
-#define PCC_LPSPI2_INDEX                         46
 #define PCC_PDB1_INDEX                           49
 #define PCC_CRC_INDEX                            50
 #define PCC_PDB0_INDEX                           54
@@ -8189,7 +8113,6 @@ typedef struct {
 #define PCC_LPI2C0_INDEX                         102
 #define PCC_LPUART0_INDEX                        106
 #define PCC_LPUART1_INDEX                        107
-#define PCC_LPUART2_INDEX                        108
 #define PCC_CMP0_INDEX                           115
 
 /* ----------------------------------------------------------------------------
@@ -11906,15 +11829,15 @@ typedef struct {
 
 /*!
  * @}
- */ /* end of group Peripheral_access_layer_S32K144 */
+ */ /* end of group Peripheral_access_layer_S32K142 */
 
 
 /* ----------------------------------------------------------------------------
-   -- Backward Compatibility for S32K144
+   -- Backward Compatibility for S32K142
    ---------------------------------------------------------------------------- */
 
 /*!
- * @addtogroup Backward_Compatibility_Symbols_S32K144 Backward Compatibility for S32K144
+ * @addtogroup Backward_Compatibility_Symbols_S32K142 Backward Compatibility for S32K142
  * @{
  */
 
@@ -11922,16 +11845,16 @@ typedef struct {
 
 /*!
  * @}
- */ /* end of group Backward_Compatibility_Symbols_S32K144 */
+ */ /* end of group Backward_Compatibility_Symbols_S32K142 */
 
 
-#else /* #if !defined(S32K144_H_) */
+#else /* #if !defined(S32K142_H_) */
   /* There is already included the same memory map. Check if it is compatible (has the same major version) */
   #if (MCU_MEM_MAP_VERSION != 0x0400u)
     #if (!defined(MCU_MEM_MAP_SUPPRESS_VERSION_WARNING))
       #warning There are included two not compatible versions of memory maps. Please check possible differences.
     #endif /* (!defined(MCU_MEM_MAP_SUPPRESS_VERSION_WARNING)) */
   #endif /* (MCU_MEM_MAP_VERSION != 0x0400u) */
-#endif  /* #if !defined(S32K144_H_) */
+#endif  /* #if !defined(S32K142_H_) */
 
-/* S32K144.h, eof. */
+/* S32K142.h, eof. */

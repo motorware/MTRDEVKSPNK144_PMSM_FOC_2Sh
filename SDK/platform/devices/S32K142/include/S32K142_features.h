@@ -17,7 +17,7 @@
  */
 
 /*!
- * @file S32K144_features.h
+ * @file S32K142_features.h
  * @brief Chip specific module features
  *
  * @page misra_violations MISRA-C:2012 violations
@@ -58,8 +58,8 @@
  *
  */
 
-#if !defined(S32K144_FEATURES_H)
-#define S32K144_FEATURES_H
+#if !defined(S32K142_FEATURES_H)
+#define S32K142_FEATURES_H
 
 /* ERRATA sections*/
 
@@ -70,11 +70,6 @@
 /* @brief ARM Errata 709718: VDIV or VSQRT instructions might not complete correctly when very
  * short ISRs are used. */
 #define ERRATA_E6940
-
-/* @brief E10655: When using LPSPI in master mode and the SR[MBF] bit is read as a one, then, the
- * flag is set. If it is read as a zero, it must be read second time and this second read will be
- * the correct state of the bit.​ */
-#define ERRATA_E10655
 
 /* @brief E10792: LPI2C: Slave Transmit Data Flag may incorrectly read as one when TXCFG is zero.
  * Interrupts for transfer data should be enabled after the address valid event is detected and
@@ -94,11 +89,6 @@
 
 /* @brief Number of alternative clocks available */
 #define NUMBER_OF_ALT_CLOCKS  ADC_CLK_ALT_1
-
-/* PCC module features */
-
-/* @brief Has InUse feature (register bit PCC[INUSE]). */
-#define FEATURE_PCC_HAS_IN_USE_FEATURE (0)
 
 /* PORT module features */
 /*! @brief PORT Used for setting Pins */
@@ -130,19 +120,6 @@
 /* @brief SIM_CHIPCTL_ADC_INTERLEAVE_EN bit is available */
 #define FEATURE_PINS_HAS_ADC_INTERLEAVE_EN (1)
 
-/* SOC module features */
-
-/* @brief PORT availability on the SoC. */
-#define FEATURE_SOC_PORT_COUNT (5)
-
-#define FEATURE_SOC_SCG_COUNT (1)
-
-/* @brief Slow IRC high range clock frequency. */
-#define FEATURE_SCG_SIRC_HIGH_RANGE_FREQ (8000000U)
-
-/* @brief Fast IRC trimmed clock frequency(48MHz). */
-#define FEATURE_SCG_FIRC_FREQ0  (48000000U)
-
 /* CMP module features */
 
 /* @brief Comparator hard block offset control */
@@ -171,6 +148,19 @@
 #define CMP_MUX_SOURCE          1U
 #define CMP_DAC_RESOLUTION      255U
 
+/* SOC module features */
+
+/* @brief PORT availability on the SoC. */
+#define FEATURE_SOC_PORT_COUNT (5)
+
+#define FEATURE_SOC_SCG_COUNT (1)
+
+/* @brief Slow IRC high range clock frequency. */
+#define FEATURE_SCG_SIRC_HIGH_RANGE_FREQ (8000000U)
+
+/* @brief Fast IRC trimmed clock frequency(48MHz). */
+#define FEATURE_SCG_FIRC_FREQ0  (48000000U)
+
 /* FLASH module features */
 
 /* @brief Is of type FTFA. */
@@ -192,9 +182,9 @@
 /* @brief P-Flash block count. */
 #define FEATURE_FLS_PF_BLOCK_COUNT (1u)
 /* @brief P-Flash block size. */
-#define FEATURE_FLS_PF_BLOCK_SIZE (0x80000U)
+#define FEATURE_FLS_PF_BLOCK_SIZE (0x40000u)
 /* @brief P-Flash sector size. */
-#define FEATURE_FLS_PF_BLOCK_SECTOR_SIZE (4096u)
+#define FEATURE_FLS_PF_BLOCK_SECTOR_SIZE (2048u)
 /* @brief P-Flash write unit size. */
 #define FEATURE_FLS_PF_BLOCK_WRITE_UNIT_SIZE (8u)
 /* @brief P-Flash block swap feature. */
@@ -254,11 +244,11 @@
 /* @brief Has 0x81 Set FlexRAM Function command. */
 #define FEATURE_FLS_HAS_SET_FLEXRAM_FUNCTION_CMD (1u)
 /* @brief P-Flash Erase/Read 1st all block command address alignment. */
-#define FEATURE_FLS_PF_BLOCK_CMD_ADDRESS_ALIGMENT (16u)
+#define FEATURE_FLS_PF_BLOCK_CMD_ADDRESS_ALIGMENT (8u)
 /* @brief P-Flash Erase sector command address alignment. */
-#define FEATURE_FLS_PF_SECTOR_CMD_ADDRESS_ALIGMENT (16u)
+#define FEATURE_FLS_PF_SECTOR_CMD_ADDRESS_ALIGMENT (8u)
 /* @brief P-Flash Program/Verify section command address alignment. */
-#define FEATURE_FLS_PF_SECTION_CMD_ADDRESS_ALIGMENT (16u)
+#define FEATURE_FLS_PF_SECTION_CMD_ADDRESS_ALIGMENT (8u)
 /* @brief P-Flash Read resource command address alignment. */
 #define FEATURE_FLS_PF_RESOURCE_CMD_ADDRESS_ALIGMENT (8u)
 /* @brief P-Flash Program check command address alignment. */
@@ -344,68 +334,6 @@
 /* @brief Has the interrupt double bit fault detect. */
 #define FEATURE_FLS_HAS_INTERRUPT_DOUBLE_BIT_FAULT_IRQ (1)
 
-/* CAN module features */
-
-/* @brief Frames available in Rx FIFO flag shift */
-#define FEATURE_CAN_RXFIFO_FRAME_AVAILABLE  (5U)
-/* @brief Rx FIFO warning flag shift */
-#define FEATURE_CAN_RXFIFO_WARNING          (6U)
-/* @brief Rx FIFO overflow flag shift */
-#define FEATURE_CAN_RXFIFO_OVERFLOW         (7U)
-/* @brief Has Flexible Data Rate for CAN0 */
-#define FEATURE_CAN0_HAS_FD                 (1)
-/* @brief Has Flexible Data Rate for CAN1 */
-#define FEATURE_CAN1_HAS_FD                 (0)
-/* @brief Has Flexible Data Rate for CAN2 */
-#define FEATURE_CAN2_HAS_FD                 (0)
-/* @brief Maximum number of Message Buffers supported for payload size 8 for CAN0 */
-#define FEATURE_CAN0_MAX_MB_NUM             (32U)
-/* @brief Maximum number of Message Buffers supported for payload size 8 for CAN1 */
-#define FEATURE_CAN1_MAX_MB_NUM             (16U)
-/* @brief Maximum number of Message Buffers supported for payload size 8 for CAN2 */
-#define FEATURE_CAN2_MAX_MB_NUM             (16U)
-/* @brief Has PE clock source select (bit field CAN_CTRL1[CLKSRC]). */
-#define FEATURE_CAN_HAS_PE_CLKSRC_SELECT    (1)
-/* @brief Has DMA enable (bit field MCR[DMA]). */
-#define FEATURE_CAN_HAS_DMA_ENABLE          (1)
-/* @brief Maximum number of Message Buffers supported for payload size 8 for any of the CAN instances */
-#define FEATURE_CAN_MAX_MB_NUM              (32U)
-/* @brief Maximum number of Message Buffers supported for payload size 8 for any of the CAN instances */
-#define FEATURE_CAN_MAX_MB_NUM_ARRAY        { FEATURE_CAN0_MAX_MB_NUM, \
-                                              FEATURE_CAN1_MAX_MB_NUM, \
-                                              FEATURE_CAN2_MAX_MB_NUM }
-/* @brief Has Pretending Networking mode */
-#define FEATURE_CAN_HAS_PRETENDED_NETWORKING    (1)
-/* @brief Has Stuff Bit Count Enable Bit */
-#define FEATURE_CAN_HAS_STFCNTEN_ENABLE         (0)
-/* @brief Has ISO CAN FD Enable Bit */
-#define FEATURE_CAN_HAS_ISOCANFDEN_ENABLE       (1)
-/* @brief Has Message Buffer Data Size Region 1 */
-#define FEATURE_CAN_HAS_MBDSR1                  (0)
-/* @brief Has Message Buffer Data Size Region 2 */
-#define FEATURE_CAN_HAS_MBDSR2                  (0)
-/* @brief DMA hardware requests for all FlexCAN instances */
-#define FEATURE_CAN_EDMA_REQUESTS              { EDMA_REQ_FLEXCAN0, \
-                                                 EDMA_REQ_FLEXCAN1, \
-                                                 EDMA_REQ_FLEXCAN2 }
-
-
-/* @brief Maximum number of Message Buffers IRQs */
-#define FEATURE_CAN_MB_IRQS_MAX_COUNT       (2U)
-/* @brief Message Buffers IRQs */
-#define FEATURE_CAN_MB_IRQS                 { CAN_ORed_0_15_MB_IRQS, \
-                                              CAN_ORed_16_31_MB_IRQS }
-/* @brief Has Wake Up Irq channels (CAN_Wake_Up_IRQS_CH_COUNT > 0u) */
-#define FEATURE_CAN_HAS_WAKE_UP_IRQ         (1)
-/* @brief Has Self Wake Up mode */
-#define FEATURE_CAN_HAS_SELF_WAKE_UP        (0)
-/* @brief Has Flexible Data Rate */
-#define FEATURE_CAN_HAS_FD                  (1)
-/* @brief Clock name for the PE oscillator clock source */
-#define FEATURE_CAN_PE_OSC_CLK_NAME         SOSC_CLK
-/* @bried FlexCAN has Detection And Correction of Memory Errors */
-#define FEATURE_CAN_HAS_MEM_ERR_DET			(0)
-
 /* LPUART module features */
 
 /* @brief Has extended data register ED. */
@@ -433,7 +361,7 @@
 /* @brief Default baud rate modulo divisor. */
 #define FEATURE_LPUART_DEFAULT_SBR (0x04UL)
 /* @brief Clock names for LPUART. */
-#define LPUART_CLOCK_NAMES {LPUART0_CLK, LPUART1_CLK, LPUART2_CLK}
+#define LPUART_CLOCK_NAMES {LPUART0_CLK, LPUART1_CLK}
 
 /* FlexIO module features */
 
@@ -445,11 +373,6 @@
 #define FEATURE_FLEXIO_DMA_REQ_2    EDMA_REQ_FLEXIO_SHIFTER2
 #define FEATURE_FLEXIO_DMA_REQ_3    EDMA_REQ_FLEXIO_SHIFTER3
 
-/* LPSPI module features */
-
-/* @brief DMA instance used for LPSPI module */
-#define LPSPI_DMA_INSTANCE 0U
-
 /* LPI2C module features */
 
 /* @brief DMA instance used for LPI2C module */
@@ -460,27 +383,10 @@
 /* @brief PCC clocks for LPI2C module. */
 #define LPI2C_PCC_CLOCKS                         {LPI2C0_CLK}
 
-/* Interrupt module features */
-
-/* @brief Lowest interrupt request number. */
-#define FEATURE_INTERRUPT_IRQ_MIN         (NonMaskableInt_IRQn)
-/* @brief Highest interrupt request number. */
-#define FEATURE_INTERRUPT_IRQ_MAX         (FTM3_Ovf_Reload_IRQn)
-/**< Number of priority bits implemented in the NVIC */
-#define FEATURE_NVIC_PRIO_BITS            (4U)
-/* @brief Has software interrupt. */
-#define FEATURE_INTERRUPT_HAS_SOFTWARE_IRQ  (0u)
-/* @brief Has pending interrupt state. */
-#define FEATURE_INTERRUPT_HAS_PENDING_STATE (1u)
-/* @brief Has active interrupt state. */
-#define FEATURE_INTERRUPT_HAS_ACTIVE_STATE  (1u)
-/* @brief Multicore support for interrupts */
-#define FEATURE_INTERRUPT_MULTICORE_SUPPORT  (0u)
-/* @brief Registers in which the start of interrupt vector table needs to be configured */
-#define FEATURE_INTERRUPT_INT_VECTORS {&S32_SCB->VTOR}
-
-
-/* System Control Block module features */
+/* @brief Disable high-speed and ultra-fast operating modes for S32K14x. */
+#define LPI2C_HAS_FAST_PLUS_MODE (0U)
+#define LPI2C_HAS_HIGH_SPEED_MODE (0U)
+#define LPI2C_HAS_ULTRA_FAST_MODE (0U)
 
 /* @brief VECTKEY value so that AIRCR register write is not ignored. */
 #define FEATURE_SCB_VECTKEY               (0x05FAU)
@@ -498,6 +404,7 @@
 #define FEATURE_SMC_HAS_HIGH_SPEED_RUN_MODE (1U)
 /* @brief Value of SPLL source clock in the SCG_HCCR register */
 #define FEATURE_SCG_SPLL_VALUE (6U)
+
 /* RCM module feature */
 
 /* @brief Has existence of CMU loss of clock as reset source */
@@ -564,6 +471,7 @@ read and write permissions (e.g. master4~7 in S32K14x).
 #define FEATURE_MPU_SLAVE_WIDTH               (4u)
 #define FEATURE_MPU_SLAVE(x)                  (((uint32_t)(((uint32_t)(x))<<FEATURE_MPU_SLAVE_SHIFT))&FEATURE_MPU_SLAVE_MASK)
 
+
 /* WDOG module features */
 
 /* @brief The 32-bit value used for unlocking the WDOG. */
@@ -591,6 +499,25 @@ read and write permissions (e.g. master4~7 in S32K14x).
 /* @brief Default reset value of the CS register. */
 #define FEATURE_WDOG_CS_RESET_VALUE                     (0x2520U)
 
+/* FTM module features */
+
+/* @brief Number of PWM channels */
+#define FEATURE_FTM_CHANNEL_COUNT               (8U)
+/* @brief Number of fault channels */
+#define FTM_FEATURE_FAULT_CHANNELS              (4U)
+/* @brief Width of control channel */
+#define FTM_FEATURE_COMBINE_CHAN_CTRL_WIDTH     (8U)
+/* @brief Output channel offset */
+#define FTM_FEATURE_OUTPUT_CHANNEL_OFFSET       (16U)
+/* @brief Max counter value */
+#define FTM_FEATURE_CNT_MAX_VALUE_U32           (0x0000FFFFU)
+/* @brief Input capture for single shot */
+#define FTM_FEATURE_INPUT_CAPTURE_SINGLE_SHOT   (2U)
+/* @brief Dithering has supported on the generated PWM signals */
+#define FEATURE_FTM_HAS_SUPPORTED_DITHERING     (1U)
+/*! @brief Number of interrupt vector for channels of the FTM module. */
+#define FEATURE_FTM_HAS_NUM_IRQS_CHANS          (4U)
+
 /* CRC module features */
 
 /* @brief CRC module use for S32K. */
@@ -605,147 +532,6 @@ read and write permissions (e.g. master4~7 in S32K14x).
 #define FEATURE_CRC_DEFAULT_POLYNOMIAL          (0x1021U)
 /* @brief Default seed value is 0xFFFFU */
 #define FEATURE_CRC_DEFAULT_SEED                (0xFFFFU)
-
-/* DMA module features */
-
-/* @brief Number of DMA channels. */
-#define FEATURE_DMA_CHANNELS (16U)
-/* @brief Number of DMA virtual channels. */
-#define FEATURE_DMA_VIRTUAL_CHANNELS (FEATURE_DMA_CHANNELS * DMA_INSTANCE_COUNT)
-/* @brief Number of DMA interrupt lines. */
-#define FEATURE_DMA_CHANNELS_INTERRUPT_LINES (16U)
-/* @brief Number of DMA virtual interrupt lines. */
-#define FEATURE_DMA_VIRTUAL_CHANNELS_INTERRUPT_LINES ((uint32_t)FEATURE_DMA_CHANNELS_INTERRUPT_LINES * (uint32_t)DMA_INSTANCE_COUNT)
-/* @brief Number of DMA error interrupt lines. */
-#define FEATURE_DMA_ERROR_INTERRUPT_LINES (1U)
-/* @brief Number of DMA virtual error interrupt lines. */
-#define FEATURE_DMA_VIRTUAL_ERROR_INTERRUPT_LINES ((uint32_t)FEATURE_DMA_ERROR_INTERRUPT_LINES * (uint32_t)DMA_INSTANCE_COUNT)
-/* @brief DMA module has error interrupt. */
-#define FEATURE_DMA_HAS_ERROR_IRQ
-/* @brief DMA module separate interrupt lines for each channel */
-#define FEATURE_DMA_SEPARATE_IRQ_LINES_PER_CHN
-/* @brief Conversion from channel index to DCHPRI index. */
-#define FEATURE_DMA_CHN_TO_DCHPRI_INDEX(x) ((x) ^ 3U)
-/* @brief DMA channel groups count. */
-#define FEATURE_DMA_CHANNEL_GROUP_COUNT (1U)
-/* @brief Clock name for DMA */
-#define FEATURE_DMA_CLOCK_NAMES {SIM_DMA_CLK}
-/* @brief DMA channel width based on number of TCDs: 2^N, N=4,5,... */
-#define FEATURE_DMA_CH_WIDTH (4U)
-/* @brief DMA channel to instance */
-#define FEATURE_DMA_VCH_TO_INSTANCE(x) 	((x) >> (uint32_t)FEATURE_DMA_CH_WIDTH)
-/* @brief DMA virtual channel to channel */
-#define FEATURE_DMA_VCH_TO_CH(x)        ((x) & ((uint32_t)FEATURE_DMA_CHANNELS - 1U))
-/* @brief DMA supports the following particular transfer size: */
-#define FEATURE_DMA_TRANSFER_SIZE_16B
-#define FEATURE_DMA_TRANSFER_SIZE_32B
-
-/* DMAMUX module features */
-
-/* @brief DMAMUX peripheral is available in silicon. */
-#define FEATURE_DMAMUX_AVAILABLE
-/* @brief Number of DMA channels. */
-#define FEATURE_DMAMUX_CHANNELS (16U)
-/* @brief Has the periodic trigger capability */
-#define FEATURE_DMAMUX_HAS_TRIG (1)
-/* @brief Conversion from request source to the actual DMAMUX channel */
-#define FEATURE_DMAMUX_REQ_SRC_TO_CH(x) (x)
-/* @brief Mapping between request source and DMAMUX instance */
-#define FEATURE_DMAMUX_REQ_SRC_TO_INSTANCE(x) (0U)
-/* @brief Conversion from eDMA channel index to DMAMUX channel. */
-#define FEATURE_DMAMUX_DMA_CH_TO_CH(x) (x)
-/* @brief Conversion from DMAMUX channel DMAMUX register index. */
-#define FEATURE_DMAMUX_CHN_REG_INDEX(x) (x)
-/* @brief Clock names for DMAMUX. */
-#define FEATURE_DMAMUX_CLOCK_NAMES {DMAMUX0_CLK}
-/*!
- * @brief Structure for the DMA hardware request
- *
- * Defines the structure for the DMA hardware request collections. The user can configure the
- * hardware request into DMAMUX to trigger the DMA transfer accordingly. The index
- * of the hardware request varies according  to the to SoC.
- */
-
-typedef enum {
-    EDMA_REQ_DISABLED = 0U,
-    EDMA_REQ_LPUART0_RX = 2U,
-    EDMA_REQ_LPUART0_TX = 3U,
-    EDMA_REQ_LPUART1_RX = 4U,
-    EDMA_REQ_LPUART1_TX = 5U,
-    EDMA_REQ_LPUART2_RX = 6U,
-    EDMA_REQ_LPUART2_TX = 7U,
-    EDMA_REQ_FLEXIO_SHIFTER0 = 10U,
-    EDMA_REQ_FLEXIO_SHIFTER1 = 11U,
-    EDMA_REQ_FLEXIO_SHIFTER2 = 12U,
-    EDMA_REQ_FLEXIO_SHIFTER3 = 13U,
-    EDMA_REQ_LPSPI0_RX = 14U,
-    EDMA_REQ_LPSPI0_TX = 15U,
-    EDMA_REQ_LPSPI1_RX = 16U,
-    EDMA_REQ_LPSPI1_TX = 17U,
-    EDMA_REQ_LPSPI2_RX = 18U,
-    EDMA_REQ_LPSPI2_TX = 19U,
-    EDMA_REQ_FTM1_CHANNEL_0 = 20U,
-    EDMA_REQ_FTM1_CHANNEL_1 = 21U,
-    EDMA_REQ_FTM1_CHANNEL_2 = 22U,
-    EDMA_REQ_FTM1_CHANNEL_3 = 23U,
-    EDMA_REQ_FTM1_CHANNEL_4 = 24U,
-    EDMA_REQ_FTM1_CHANNEL_5 = 25U,
-    EDMA_REQ_FTM1_CHANNEL_6 = 26U,
-    EDMA_REQ_FTM1_CHANNEL_7 = 27U,
-    EDMA_REQ_FTM2_CHANNEL_0 = 28U,
-    EDMA_REQ_FTM2_CHANNEL_1 = 29U,
-    EDMA_REQ_FTM2_CHANNEL_2 = 30U,
-    EDMA_REQ_FTM2_CHANNEL_3 = 31U,
-    EDMA_REQ_FTM2_CHANNEL_4 = 32U,
-    EDMA_REQ_FTM2_CHANNEL_5 = 33U,
-    EDMA_REQ_FTM2_CHANNEL_6 = 34U,
-    EDMA_REQ_FTM2_CHANNEL_7 = 35U,
-    EDMA_REQ_FTM0_OR_CH0_CH7 = 36U,
-    EDMA_REQ_FTM3_OR_CH0_CH7 = 37U,
-    EDMA_REQ_ADC0 = 42U,
-    EDMA_REQ_ADC1 = 43U,
-    EDMA_REQ_LPI2C0_RX = 44U,
-    EDMA_REQ_LPI2C0_TX = 45U,
-    EDMA_REQ_PDB0 = 46U,
-    EDMA_REQ_PDB1 = 47U,
-    EDMA_REQ_CMP0 = 48U,
-    EDMA_REQ_PORTA = 49U,
-    EDMA_REQ_PORTB = 50U,
-    EDMA_REQ_PORTC = 51U,
-    EDMA_REQ_PORTD = 52U,
-    EDMA_REQ_PORTE = 53U,
-    EDMA_REQ_FLEXCAN0 = 54U,
-    EDMA_REQ_FLEXCAN1 = 55U,
-    EDMA_REQ_FLEXCAN2 = 56U,
-    EDMA_REQ_LPTMR0 = 59U,
-    EDMA_REQ_DMAMUX_ALWAYS_ENABLED0 = 62U,
-    EDMA_REQ_DMAMUX_ALWAYS_ENABLED1 = 63U
-} dma_request_source_t;
-
-/* LPI2C module features */
-
-/* @brief Disable high-speed and ultra-fast operating modes for S32K14x. */
-#define LPI2C_HAS_FAST_PLUS_MODE (0U)
-#define LPI2C_HAS_HIGH_SPEED_MODE (0U)
-#define LPI2C_HAS_ULTRA_FAST_MODE (0U)
-
-/* FTM module features */
-/* @brief Number of PWM channels */
-#define FEATURE_FTM_CHANNEL_COUNT               (8U)
-/* @brief Number of fault channels */
-#define FTM_FEATURE_FAULT_CHANNELS              (4U)
-/* @brief Width of control channel */
-#define FTM_FEATURE_COMBINE_CHAN_CTRL_WIDTH     (8U)
-/* @brief Output channel offset */
-#define FTM_FEATURE_OUTPUT_CHANNEL_OFFSET       (16U)
-/* @brief Max counter value */
-#define FTM_FEATURE_CNT_MAX_VALUE_U32           (0x0000FFFFU)
-/* @brief Input capture for single shot */
-#define FTM_FEATURE_INPUT_CAPTURE_SINGLE_SHOT   (2U)
-/* @brief Dithering has supported on the generated PWM signals */
-#define FEATURE_FTM_HAS_SUPPORTED_DITHERING     (0U)
-/*! @brief Number of interrupt vector for channels of the FTM module. */
-#define FEATURE_FTM_HAS_NUM_IRQS_CHANS          (4U)
 
 /* EWM module features */
 
@@ -823,32 +609,29 @@ typedef enum {
     PCC_END_OF_BUS_CLOCKS        = 51u,      /*!< End of BUS clocks              */
     FlexCAN0_CLK                 = 52u,      /*!< FlexCAN0 clock source          */
     FlexCAN1_CLK                 = 53u,      /*!< FlexCAN1 clock source          */
-    FlexCAN2_CLK                 = 54u,      /*!< FlexCAN2 clock source          */
-    PDB0_CLK                     = 55u,      /*!< PDB0 clock source              */
-    PDB1_CLK                     = 56u,      /*!< PDB1 clock source              */
-    PCC_END_OF_SYS_CLOCKS        = 57u,      /*!< End of SYS clocks              */
-    FTFC0_CLK                    = 58u,      /*!< FTFC0 clock source             */
-    PCC_END_OF_SLOW_CLOCKS       = 59u,      /*!< End of SLOW clocks             */
-    FTM0_CLK                     = 60u,      /*!< FTM0 clock source              */
-    FTM1_CLK                     = 61u,      /*!< FTM1 clock source              */
-    FTM2_CLK                     = 62u,      /*!< FTM2 clock source              */
-    FTM3_CLK                     = 63u,      /*!< FTM3 clock source              */
-    PCC_END_OF_ASYNCH_DIV1_CLOCKS= 64u,      /*!< End of ASYNCH DIV1 clocks      */
-    ADC0_CLK                     = 65u,      /*!< ADC0 clock source              */
-    ADC1_CLK                     = 66u,      /*!< ADC1 clock source              */
-    FLEXIO0_CLK                  = 67u,      /*!< FLEXIO0 clock source           */
-    LPI2C0_CLK                   = 68u,      /*!< LPI2C0 clock source            */
-    LPIT0_CLK                    = 69u,      /*!< LPIT0 clock source             */
-    LPSPI0_CLK                   = 70u,      /*!< LPSPI0 clock source            */
-    LPSPI1_CLK                   = 71u,      /*!< LPSPI1 clock source            */
-    LPSPI2_CLK                   = 72u,      /*!< LPSPI2 clock source            */
-    LPTMR0_CLK                   = 73u,      /*!< LPTMR0 clock source            */
-    LPUART0_CLK                  = 74u,      /*!< LPUART0 clock source           */
-    LPUART1_CLK                  = 75u,      /*!< LPUART1 clock source           */
-    LPUART2_CLK                  = 76u,      /*!< LPUART2 clock source           */
-    PCC_END_OF_ASYNCH_DIV2_CLOCKS= 77u,      /*!< End of ASYNCH DIV2 clocks      */
-    PCC_END_OF_CLOCKS            = 78u,      /*!< End of PCC clocks              */
-    CLOCK_NAME_COUNT             = 79u,      /*!< The total number of entries    */
+    PDB0_CLK                     = 54u,      /*!< PDB0 clock source              */
+    PDB1_CLK                     = 55u,      /*!< PDB1 clock source              */
+    PCC_END_OF_SYS_CLOCKS        = 56u,      /*!< End of SYS clocks              */
+    FTFC0_CLK                    = 57u,      /*!< FTFC0 clock source             */
+    PCC_END_OF_SLOW_CLOCKS       = 58u,      /*!< End of SLOW clocks             */
+    FTM0_CLK                     = 59u,      /*!< FTM0 clock source              */
+    FTM1_CLK                     = 60u,      /*!< FTM1 clock source              */
+    FTM2_CLK                     = 61u,      /*!< FTM2 clock source              */
+    FTM3_CLK                     = 62u,      /*!< FTM3 clock source              */
+    PCC_END_OF_ASYNCH_DIV1_CLOCKS= 63u,      /*!< End of ASYNCH DIV1 clocks      */
+    ADC0_CLK                     = 64u,      /*!< ADC0 clock source              */
+    ADC1_CLK                     = 65u,      /*!< ADC1 clock source              */
+    FLEXIO0_CLK                  = 66u,      /*!< FLEXIO0 clock source           */
+    LPI2C0_CLK                   = 67u,      /*!< LPI2C0 clock source            */
+    LPIT0_CLK                    = 68u,      /*!< LPIT0 clock source             */
+    LPSPI0_CLK                   = 69u,      /*!< LPSPI0 clock source            */
+    LPSPI1_CLK                   = 70u,      /*!< LPSPI1 clock source            */
+    LPTMR0_CLK                   = 71u,      /*!< LPTMR0 clock source            */
+    LPUART0_CLK                  = 72u,      /*!< LPUART0 clock source           */
+    LPUART1_CLK                  = 73u,      /*!< LPUART1 clock source           */
+    PCC_END_OF_ASYNCH_DIV2_CLOCKS= 74u,      /*!< End of ASYNCH DIV2 clocks      */
+    PCC_END_OF_CLOCKS            = 75u,      /*!< End of PCC clocks              */
+    CLOCK_NAME_COUNT             = 76u,      /*!< The total number of entries    */
 } clock_names_t;
 
 #define PCC_INVALID_INDEX  0
@@ -914,31 +697,28 @@ PCC_RTC_INDEX,                      /*!< RTC clock source                50 */  
 PCC_INVALID_INDEX,                  /*!< End of BUS clocks               51 */   \
 PCC_FlexCAN0_INDEX,                 /*!< FlexCAN0 clock source           52 */   \
 PCC_FlexCAN1_INDEX,                 /*!< FlexCAN1 clock source           53 */   \
-PCC_FlexCAN2_INDEX,                 /*!< FlexCAN2 clock source           54 */   \
-PCC_PDB0_INDEX,                     /*!< PDB0 clock source               55 */   \
-PCC_PDB1_INDEX,                     /*!< PDB1 clock source               56 */   \
-PCC_INVALID_INDEX,                  /*!< End of SYS clocks               57 */   \
-PCC_FTFC_INDEX,                     /*!< FTFC clock source               58 */   \
-PCC_INVALID_INDEX,                  /*!< End of SLOW clocks              59 */   \
-PCC_FTM0_INDEX,                     /*!< FTM0 clock source               60 */   \
-PCC_FTM1_INDEX,                     /*!< FTM1 clock source               61 */   \
-PCC_FTM2_INDEX,                     /*!< FTM2 clock source               62 */   \
-PCC_FTM3_INDEX,                     /*!< FTM3 clock source               63 */   \
-PCC_INVALID_INDEX,                  /*!< End of ASYNCH DIV1 clocks       64 */   \
-PCC_ADC0_INDEX,                     /*!< ADC0 clock source               65 */   \
-PCC_ADC1_INDEX,                     /*!< ADC1 clock source               66 */   \
-PCC_FlexIO_INDEX,                   /*!< FLEXIO clock source             67 */   \
-PCC_LPI2C0_INDEX,                   /*!< LPI2C0 clock source             68 */   \
-PCC_LPIT_INDEX,                     /*!< LPIT clock source               69 */   \
-PCC_LPSPI0_INDEX,                   /*!< LPSPI0 clock source             70 */   \
-PCC_LPSPI1_INDEX,                   /*!< LPSPI1 clock source             71 */   \
-PCC_LPSPI2_INDEX,                   /*!< LPSPI2 clock source             72 */   \
-PCC_LPTMR0_INDEX,                   /*!< LPTMR0 clock source             73 */   \
-PCC_LPUART0_INDEX,                  /*!< LPUART0 clock source            74 */   \
-PCC_LPUART1_INDEX,                  /*!< LPUART1 clock source            75 */   \
-PCC_LPUART2_INDEX,                  /*!< LPUART2 clock source            76 */   \
-PCC_INVALID_INDEX,                  /*!< End of ASYNCH DIV2 clocks       77 */   \
-PCC_INVALID_INDEX,                  /*!< End of PCC clocks               78 */   \
+PCC_PDB0_INDEX,                     /*!< PDB0 clock source               54 */   \
+PCC_PDB1_INDEX,                     /*!< PDB1 clock source               55 */   \
+PCC_INVALID_INDEX,                  /*!< End of SYS clocks               56 */   \
+PCC_FTFC_INDEX,                     /*!< FTFC clock source               57 */   \
+PCC_INVALID_INDEX,                  /*!< End of SLOW clocks              58 */   \
+PCC_FTM0_INDEX,                     /*!< FTM0 clock source               59 */   \
+PCC_FTM1_INDEX,                     /*!< FTM1 clock source               60 */   \
+PCC_FTM2_INDEX,                     /*!< FTM2 clock source               61 */   \
+PCC_FTM3_INDEX,                     /*!< FTM3 clock source               62 */   \
+PCC_INVALID_INDEX,                  /*!< End of ASYNCH DIV1 clocks       63 */   \
+PCC_ADC0_INDEX,                     /*!< ADC0 clock source               64 */   \
+PCC_ADC1_INDEX,                     /*!< ADC1 clock source               65 */   \
+PCC_FlexIO_INDEX,                   /*!< FLEXIO clock source             66 */   \
+PCC_LPI2C0_INDEX,                   /*!< LPI2C0 clock source             67 */   \
+PCC_LPIT_INDEX,                     /*!< LPIT clock source               68 */   \
+PCC_LPSPI0_INDEX,                   /*!< LPSPI0 clock source             69 */   \
+PCC_LPSPI1_INDEX,                   /*!< LPSPI1 clock source             70 */   \
+PCC_LPTMR0_INDEX,                   /*!< LPTMR0 clock source             71 */   \
+PCC_LPUART0_INDEX,                  /*!< LPUART0 clock source            72 */   \
+PCC_LPUART1_INDEX,                  /*!< LPUART1 clock source            73 */   \
+PCC_INVALID_INDEX,                  /*!< End of ASYNCH DIV2 clocks       74 */   \
+PCC_INVALID_INDEX,                  /*!< End of PCC clocks               75 */   \
 }
 
 /*! @brief Peripheral instance features
@@ -1014,32 +794,30 @@ PCC_INVALID_INDEX,                  /*!< End of PCC clocks               78 */  
 (NO_PERIPHERAL_FEATURE),                                                                            /*!< End of BUS clocks               51 */   \
 (HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< FlexCAN0 clock source           52 */   \
 (HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< FlexCAN1 clock source           53 */   \
-(HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< FlexCAN2 clock source           54 */   \
-(HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< PDB0 clock source               55 */   \
-(HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< PDB1 clock source               56 */   \
-(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of SYS clocks               57 */   \
-(HAS_INT_CLOCK_FROM_SLOW_CLOCK),                                                                    /*!< FTFC clock source               58 */   \
-(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of SLOW clocks              59 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM0 clock source               60 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM1 clock source               61 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM2 clock source               62 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM3 clock source               63 */   \
-(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of ASYNCH DIV1 clocks       64 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< ADC0 clock source               65 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< ADC1 clock source               66 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< FLEXIO clock source             67 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPI2C0 clock source             68 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPIT clock source               69 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPSPI0 clock source             70 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPSPI1 clock source             71 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPSPI2 clock source             72 */   \
-(HAS_MULTIPLIER | HAS_DIVIDER | HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),     /*!< LPTMR0 clock source             73 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPUART0 clock source            74 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPUART1 clock source            75 */   \
-(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPUART2 clock source            76 */   \
-(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of ASYNCH DIV2 clocks       77 */   \
-(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of PCC clocks               78 */   \
+(HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< PDB0 clock source               54 */   \
+(HAS_INT_CLOCK_FROM_SYS_CLOCK),                                                                     /*!< PDB1 clock source               55 */   \
+(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of SYS clocks               56 */   \
+(HAS_INT_CLOCK_FROM_SLOW_CLOCK),                                                                    /*!< FTFC clock source               57 */   \
+(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of SLOW clocks              58 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM0 clock source               59 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM1 clock source               60 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM2 clock source               61 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC1 | HAS_INT_CLOCK_FROM_SYS_CLOCK),                                    /*!< FTM3 clock source               62 */   \
+(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of ASYNCH DIV1 clocks       63 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< ADC0 clock source               64 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< ADC1 clock source               65 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< FLEXIO clock source             66 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPI2C0 clock source             67 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPIT clock source               68 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPSPI0 clock source             69 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPSPI1 clock source             70 */   \
+(HAS_MULTIPLIER | HAS_DIVIDER | HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),     /*!< LPTMR0 clock source             71 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPUART0 clock source            72 */   \
+(HAS_PROTOCOL_CLOCK_FROM_ASYNC2 | HAS_INT_CLOCK_FROM_BUS_CLOCK),                                    /*!< LPUART1 clock source            73 */   \
+(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of ASYNCH DIV2 clocks       74 */   \
+(NO_PERIPHERAL_FEATURE),                                                                            /*!< End of PCC clocks               75 */   \
 }
+
 
 /* Time to wait for SIRC to stabilize (number of
  * cycles when core runs at maximum speed - 112 MHz */
@@ -1152,6 +930,26 @@ PCC_INVALID_INDEX,                  /*!< End of PCC clocks               78 */  
 #endif /* !DO_NOT_USE_DEPRECATED_SYMBOLS */
 
 
+/* Interrupt module features */
+
+/* @brief Lowest interrupt request number. */
+#define FEATURE_INTERRUPT_IRQ_MIN         (NonMaskableInt_IRQn)
+/* @brief Highest interrupt request number. */
+#define FEATURE_INTERRUPT_IRQ_MAX         (FTM3_Ovf_Reload_IRQn)
+/**< Number of priority bits implemented in the NVIC */
+#define FEATURE_NVIC_PRIO_BITS            (4U)
+/* @brief Has software interrupt. */
+#define FEATURE_INTERRUPT_HAS_SOFTWARE_IRQ  (0u)
+/* @brief Has pending interrupt state. */
+#define FEATURE_INTERRUPT_HAS_PENDING_STATE (1u)
+/* @brief Has active interrupt state. */
+#define FEATURE_INTERRUPT_HAS_ACTIVE_STATE  (1u)
+/* @brief Multicore support for interrupts */
+#define FEATURE_INTERRUPT_MULTICORE_SUPPORT  (0u)
+/* @brief Registers in which the start of interrupt vector table needs to be configured */
+#define FEATURE_INTERRUPT_INT_VECTORS {&S32_SCB->VTOR}
+
+
 /* CSEc module features */
 
 /*! @brief CSE_PRAM offset of the page length parameter used by the following
@@ -1229,6 +1027,119 @@ CMD_GET_ID */
 /* @brief Min of adc clock frequency */
 #define ADC_CLOCK_FREQ_MIN_RUNTIME     (2000000u)
 
+
+/* DMA module features */
+
+/* @brief Number of DMA channels. */
+#define FEATURE_DMA_CHANNELS (16U)
+/* @brief Number of DMA virtual channels. */
+#define FEATURE_DMA_VIRTUAL_CHANNELS (FEATURE_DMA_CHANNELS * DMA_INSTANCE_COUNT)
+/* @brief Number of DMA interrupt lines. */
+#define FEATURE_DMA_CHANNELS_INTERRUPT_LINES (16U)
+/* @brief Number of DMA virtual interrupt lines. */
+#define FEATURE_DMA_VIRTUAL_CHANNELS_INTERRUPT_LINES ((uint32_t)FEATURE_DMA_CHANNELS_INTERRUPT_LINES * (uint32_t)DMA_INSTANCE_COUNT)
+/* @brief Number of DMA error interrupt lines. */
+#define FEATURE_DMA_ERROR_INTERRUPT_LINES (1U)
+/* @brief Number of DMA virtual error interrupt lines. */
+#define FEATURE_DMA_VIRTUAL_ERROR_INTERRUPT_LINES ((uint32_t)FEATURE_DMA_ERROR_INTERRUPT_LINES * (uint32_t)DMA_INSTANCE_COUNT)
+/* @brief DMA module has error interrupt. */
+#define FEATURE_DMA_HAS_ERROR_IRQ
+/* @brief DMA module separate interrupt lines for each channel */
+#define FEATURE_DMA_SEPARATE_IRQ_LINES_PER_CHN
+/* @brief Conversion from channel index to DCHPRI index. */
+#define FEATURE_DMA_CHN_TO_DCHPRI_INDEX(x) ((x) ^ 3U)
+/* @brief DMA channel groups count. */
+#define FEATURE_DMA_CHANNEL_GROUP_COUNT (1U)
+/* @brief Clock name for DMA */
+#define FEATURE_DMA_CLOCK_NAMES {SIM_DMA_CLK}
+/* @brief DMA channel width based on number of TCDs: 2^N, N=4,5,... */
+#define FEATURE_DMA_CH_WIDTH (4U)
+/* @brief DMA channel to instance */
+#define FEATURE_DMA_VCH_TO_INSTANCE(x) 	((x) >> (uint32_t)FEATURE_DMA_CH_WIDTH)
+/* @brief DMA virtual channel to channel */
+#define FEATURE_DMA_VCH_TO_CH(x)        ((x) & ((uint32_t)FEATURE_DMA_CHANNELS - 1U))
+/* @brief DMA supports the following particular transfer size: */
+#define FEATURE_DMA_TRANSFER_SIZE_16B
+#define FEATURE_DMA_TRANSFER_SIZE_32B
+
+
+/* DMAMUX module features */
+
+/* @brief DMAMUX peripheral is available in silicon. */
+#define FEATURE_DMAMUX_AVAILABLE
+/* @brief Number of DMA channels. */
+#define FEATURE_DMAMUX_CHANNELS (16U)
+/* @brief Has the periodic trigger capability */
+#define FEATURE_DMAMUX_HAS_TRIG (1)
+/* @brief Conversion from request source to the actual DMAMUX channel */
+#define FEATURE_DMAMUX_REQ_SRC_TO_CH(x) (x)
+/* @brief Mapping between request source and DMAMUX instance */
+#define FEATURE_DMAMUX_REQ_SRC_TO_INSTANCE(x) (0U)
+/* @brief Conversion from eDMA channel index to DMAMUX channel. */
+#define FEATURE_DMAMUX_DMA_CH_TO_CH(x) (x)
+/* @brief Conversion from DMAMUX channel DMAMUX register index. */
+#define FEATURE_DMAMUX_CHN_REG_INDEX(x) (x)
+/* @brief Clock names for DMAMUX. */
+#define FEATURE_DMAMUX_CLOCK_NAMES {DMAMUX0_CLK}
+/*!
+ * @brief Structure for the DMA hardware request
+ *
+ * Defines the structure for the DMA hardware request collections. The user can configure the
+ * hardware request into DMAMUX to trigger the DMA transfer accordingly. The index
+ * of the hardware request varies according  to the to SoC.
+ */
+
+typedef enum {
+    EDMA_REQ_DISABLED = 0U,
+    EDMA_REQ_LPUART0_RX = 2U,
+    EDMA_REQ_LPUART0_TX = 3U,
+    EDMA_REQ_LPUART1_RX = 4U,
+    EDMA_REQ_LPUART1_TX = 5U,
+    EDMA_REQ_FLEXIO_SHIFTER0 = 10U,
+    EDMA_REQ_FLEXIO_SHIFTER1 = 11U,
+    EDMA_REQ_FLEXIO_SHIFTER2 = 12U,
+    EDMA_REQ_FLEXIO_SHIFTER3 = 13U,
+    EDMA_REQ_LPSPI0_RX = 14U,
+    EDMA_REQ_LPSPI0_TX = 15U,
+    EDMA_REQ_LPSPI1_RX = 16U,
+    EDMA_REQ_LPSPI1_TX = 17U,
+    EDMA_REQ_FTM1_CHANNEL_0 = 20U,
+    EDMA_REQ_FTM1_CHANNEL_1 = 21U,
+    EDMA_REQ_FTM1_CHANNEL_2 = 22U,
+    EDMA_REQ_FTM1_CHANNEL_3 = 23U,
+    EDMA_REQ_FTM1_CHANNEL_4 = 24U,
+    EDMA_REQ_FTM1_CHANNEL_5 = 25U,
+    EDMA_REQ_FTM1_CHANNEL_6 = 26U,
+    EDMA_REQ_FTM1_CHANNEL_7 = 27U,
+    EDMA_REQ_FTM2_CHANNEL_0 = 28U,
+    EDMA_REQ_FTM2_CHANNEL_1 = 29U,
+    EDMA_REQ_FTM2_CHANNEL_2 = 30U,
+    EDMA_REQ_FTM2_CHANNEL_3 = 31U,
+    EDMA_REQ_FTM2_CHANNEL_4 = 32U,
+    EDMA_REQ_FTM2_CHANNEL_5 = 33U,
+    EDMA_REQ_FTM2_CHANNEL_6 = 34U,
+    EDMA_REQ_FTM2_CHANNEL_7 = 35U,
+    EDMA_REQ_FTM0_OR_CH0_CH7 = 36U,
+    EDMA_REQ_FTM3_OR_CH0_CH7 = 37U,
+    EDMA_REQ_ADC0 = 42U,
+    EDMA_REQ_ADC1 = 43U,
+    EDMA_REQ_LPI2C0_RX = 44U,
+    EDMA_REQ_LPI2C0_TX = 45U,
+    EDMA_REQ_PDB0 = 46U,
+    EDMA_REQ_PDB1 = 47U,
+    EDMA_REQ_CMP0 = 48U,
+    EDMA_REQ_PORTA = 49U,
+    EDMA_REQ_PORTB = 50U,
+    EDMA_REQ_PORTC = 51U,
+    EDMA_REQ_PORTD = 52U,
+    EDMA_REQ_PORTE = 53U,
+    EDMA_REQ_FLEXCAN0 = 54U,
+    EDMA_REQ_FLEXCAN1 = 55U,
+    EDMA_REQ_LPTMR0 = 59U,
+    EDMA_REQ_DMAMUX_ALWAYS_ENABLED0 = 62U,
+    EDMA_REQ_DMAMUX_ALWAYS_ENABLED1 = 63U
+} dma_request_source_t;
+
 /* LPIT module features */
 
 /*! @brief Number of interrupt vector for channels of the LPIT module. */
@@ -1243,22 +1154,78 @@ CMD_GET_ID */
 /* @brief Has directed CPU interrupt routerregisters (IRCPxxx). */
 #define FEATURE_MSCM_HAS_CPU_INTERRUPT_ROUTER            (0)
 
+
 /* OSIF module features */
 
 #define FEATURE_OSIF_USE_SYSTICK                         (1)
 #define FEATURE_OSIF_USE_PIT                             (0)
 #define FEATURE_OSIF_FREERTOS_ISR_CONTEXT_METHOD         (1) /* Cortex M device */
 
+/* CAN module features */
+
+/* @brief Frames available in Rx FIFO flag shift */
+#define FEATURE_CAN_RXFIFO_FRAME_AVAILABLE  (5U)
+/* @brief Rx FIFO warning flag shift */
+#define FEATURE_CAN_RXFIFO_WARNING          (6U)
+/* @brief Rx FIFO overflow flag shift */
+#define FEATURE_CAN_RXFIFO_OVERFLOW         (7U)
+/* @brief Has Flexible Data Rate for CAN0 */
+#define FEATURE_CAN0_HAS_FD                 (1)
+/* @brief Has Flexible Data Rate for CAN1 */
+#define FEATURE_CAN1_HAS_FD                 (0)
+/* @brief Maximum number of Message Buffers supported for payload size 8 for CAN0 */
+#define FEATURE_CAN0_MAX_MB_NUM             (32U)
+/* @brief Maximum number of Message Buffers supported for payload size 8 for CAN1 */
+#define FEATURE_CAN1_MAX_MB_NUM             (16U)
+/* @brief Has PE clock source select (bit field CAN_CTRL1[CLKSRC]). */
+#define FEATURE_CAN_HAS_PE_CLKSRC_SELECT    (1)
+/* @brief Has DMA enable (bit field MCR[DMA]). */
+#define FEATURE_CAN_HAS_DMA_ENABLE          (1)
+/* @brief Maximum number of Message Buffers supported for payload size 8 for any of the CAN instances */
+#define FEATURE_CAN_MAX_MB_NUM              (32U)
+/* @brief Maximum number of Message Buffers supported for payload size 8 for any of the CAN instances */
+#define FEATURE_CAN_MAX_MB_NUM_ARRAY        { FEATURE_CAN0_MAX_MB_NUM, \
+                                              FEATURE_CAN1_MAX_MB_NUM }
+/* @brief Has Pretending Networking mode */
+#define FEATURE_CAN_HAS_PRETENDED_NETWORKING    (1)
+/* @brief Has Stuff Bit Count Enable Bit */
+#define FEATURE_CAN_HAS_STFCNTEN_ENABLE         (0)
+/* @brief Has ISO CAN FD Enable Bit */
+#define FEATURE_CAN_HAS_ISOCANFDEN_ENABLE       (1)
+/* @brief Has Message Buffer Data Size Region 1 */
+#define FEATURE_CAN_HAS_MBDSR1                  (0)
+/* @brief Has Message Buffer Data Size Region 2 */
+#define FEATURE_CAN_HAS_MBDSR2                  (0)
+/* @brief DMA hardware requests for all FlexCAN instances */
+#define FEATURE_CAN_EDMA_REQUESTS              { EDMA_REQ_FLEXCAN0, \
+                                                 EDMA_REQ_FLEXCAN1 }
+
+/* @brief Maximum number of Message Buffers IRQs */
+#define FEATURE_CAN_MB_IRQS_MAX_COUNT       (2U)
+/* @brief Message Buffers IRQs */
+#define FEATURE_CAN_MB_IRQS                 { CAN_ORed_0_15_MB_IRQS, \
+                                              CAN_ORed_16_31_MB_IRQS }
+/* @brief Has Wake Up Irq channels (CAN_Wake_Up_IRQS_CH_COUNT > 0u) */
+#define FEATURE_CAN_HAS_WAKE_UP_IRQ         (1)
+/* @brief Has Self Wake Up mode */
+#define FEATURE_CAN_HAS_SELF_WAKE_UP        (0)
+/* @brief Has Flexible Data Rate */
+#define FEATURE_CAN_HAS_FD                  (1)
+/* @brief Clock name for the PE oscillator clock source */
+#define FEATURE_CAN_PE_OSC_CLK_NAME         SOSC_CLK
+/* @bried FlexCAN has Detection And Correction of Memory Errors */
+#define FEATURE_CAN_HAS_MEM_ERR_DET			(0)
+
 /* LPSPI module features */
 /* @brief Initial value for state structure */
-#define FEATURE_LPSPI_STATE_STRUCTURES_NULL {NULL, NULL, NULL}
+#define FEATURE_LPSPI_STATE_STRUCTURES_NULL {NULL, NULL}
 /* @brief Clock indexes for LPSPI clock */
-#define FEATURE_LPSPI_CLOCKS_NAMES {LPSPI0_CLK, LPSPI1_CLK, LPSPI2_CLK};
+#define FEATURE_LPSPI_CLOCKS_NAMES {LPSPI0_CLK, LPSPI1_CLK};
 
 /* LPTMR module features */
 
 /* @brief LPTMR pulse counter input options */
-#define FEATURE_LPTMR_HAS_INPUT_ALT1_SELECTION           (1U)
+#define FEATURE_LPTMR_HAS_INPUT_ALT1_SELECTION  (1U)
 
 /* TRGMUX module features */
 /*!
@@ -1492,7 +1459,6 @@ enum trgmux_target_module_e
 #define ISELED_PIN_38    38    /*PTD1*/
 #define ISELED_PIN_39    39    /*PTC0*/
 
-
 #define MAX_NR_OF_STRIPS 13U
 
 /* PDB module features */
@@ -1500,7 +1466,7 @@ enum trgmux_target_module_e
 /* @brief PDB has back-to-back at instance level */
 #define FEATURE_PDB_HAS_INSTANCE_BACKTOBACK  (1)
 
-#endif /* S32K144_FEATURES_H */
+#endif /* S32K142_FEATURES_H */
 
 /*******************************************************************************
  * EOF

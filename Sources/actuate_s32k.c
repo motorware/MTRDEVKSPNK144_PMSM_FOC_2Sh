@@ -15,7 +15,7 @@
 /******************************************************************************
 | Includes
 -----------------------------------------------------------------------------*/
-#include "S32K144.h"
+#include "S32K142.h"
 #include "actuate_s32k.h"
 #include "peripherals_config.h"
 #include "gflib.h"
@@ -118,10 +118,10 @@ tBool ACTUATE_SetDutycycle(SWLIBS_3Syst_FLT *fltpwm)
 {
 	tBool statePwm = true;
 
-	FTM3->CONTROLS[0].CnV = MLIB_Mul_FLT(fltpwm->fltArg1, 2000.0F);
-	FTM3->CONTROLS[2].CnV = MLIB_Mul_FLT(fltpwm->fltArg2, 2000.0F);
-	FTM3->CONTROLS[4].CnV = MLIB_Mul_FLT(fltpwm->fltArg3, 2000.0F);
-	FTM3->SYNC |= FTM_SYNC_SWSYNC_MASK;
+	FTM0->CONTROLS[0].CnV = MLIB_Mul_FLT(fltpwm->fltArg1, 2000.0F);
+	FTM0->CONTROLS[2].CnV = MLIB_Mul_FLT(fltpwm->fltArg2, 2000.0F);
+	FTM0->CONTROLS[4].CnV = MLIB_Mul_FLT(fltpwm->fltArg3, 2000.0F);
+	FTM0->SYNC |= FTM_SYNC_SWSYNC_MASK;
 
 	statePwm = false;
 

@@ -15,7 +15,7 @@
 #ifndef _ACTUATE_S32K_H_
 #define _ACTUATE_S32K_H_
 
-#include "S32K144.h"
+#include "S32K142.h"
 #include "gflib.h"
 #include "gmclib.h"
 #include "gdflib.h"
